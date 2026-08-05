@@ -19,6 +19,8 @@ from .views import (
     OrderDetailView,
     PaymentListCreateView,
     PaymentDetailView,
+    AuctionListCreateView,
+    AuctionDetailView,
 )
 
 urlpatterns = [
@@ -55,4 +57,8 @@ urlpatterns = [
     # Payment APIs
     path("payments/", PaymentListCreateView.as_view(), name="payment-list"),
     path("payments/<int:pk>/", PaymentDetailView.as_view(), name="payment-detail"),
+
+    # Auction APIs
+    path("auctions/", AuctionListCreateView.as_view(), name="auction-list"),
+    path("auctions/<int:pk>/", AuctionDetailView.as_view(), name="auction-detail"),
 ]

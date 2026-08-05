@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from .models import User, Category, Product, Cart, Wishlist, Checkout, Order, Payment
+from .models import User, Category, Product, Cart, Wishlist, Checkout, Order, Payment, Auction 
 from django.db.models import Q
 from .serializers import (
     RegisterSerializer,
@@ -18,6 +18,7 @@ from .serializers import (
     CheckoutSerializer,
     OrderSerializer,
     PaymentSerializer,
+    AuctionSerializer,
 )
 
 
@@ -194,3 +195,16 @@ class PaymentListCreateView(generics.ListCreateAPIView):
 class PaymentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
+
+# -------------------------------
+# Auction APIs
+# -------------------------------
+
+class AuctionListCreateView(generics.ListCreateAPIView):
+    queryset = Auction.objects.all()
+    serializer_class = AuctionSerializer
+
+
+class AuctionDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Auction.objects.all()
+    serializer_class = AuctionSerializer

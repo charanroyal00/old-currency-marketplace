@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Category, Product, Cart, Wishlist, Checkout, Order, Payment
+from .models import User, Category, Product, Cart, Wishlist, Checkout, Order, Payment, Auction
 import random
 from django.utils import timezone
 
@@ -131,4 +131,19 @@ class OrderSerializer(serializers.ModelSerializer):
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment
+        fields = "__all__"
+
+class AuctionSerializer(serializers.ModelSerializer):
+    seller_name = serializers.CharField(
+        source="seller.username",
+        read_only=True
+    )
+
+    product_title = serializers.CharField(
+        source="product.title",
+        read_only=True
+    )
+
+    class Meta:
+        model = Auction
         fields = "__all__"
