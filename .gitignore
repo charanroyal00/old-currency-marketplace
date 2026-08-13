@@ -141,3 +141,11 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Python / Django
+venv/
+__pycache__/
+*.pyc
+db.sqlite3
+.env
+.vscode/

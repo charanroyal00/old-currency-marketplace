@@ -101,6 +101,23 @@ class LoginSerializer(TokenObtainPairSerializer):
 class LoginView(TokenObtainPairView):
     serializer_class = LoginSerializer
 
+# =========================================================
+# CURRENT USER API
+# =========================================================
+
+class CurrentUserView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+
+        return Response({
+            "id": user.id,
+            "email": user.email,
+            "username": getattr(user, "username", None),
+            "role": getattr(user, "role", None),
+        })
+
 
 # =========================================================
 # FORGOT PASSWORD API

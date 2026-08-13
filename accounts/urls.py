@@ -33,6 +33,8 @@ from .views import (
 
     ReviewListCreateView,
     ReviewDetailView,
+
+    CurrentUserView,
 )
 
 
@@ -224,4 +226,6 @@ urlpatterns = [
         ReviewDetailView.as_view(),
         name="review-detail"
     ),
+
+    path("me/", CurrentUserView.as_view(), name="current-user"),
 ]
