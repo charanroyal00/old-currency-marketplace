@@ -10,11 +10,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# --------------------------------------------------
 # Quick-start development settings
-# SECURITY WARNING: keep the secret key used in production secret!
+# --------------------------------------------------
+
 SECRET_KEY = 'django-insecure-nm$=(!mn3qk(0jr)akev8-hbdd$snq)5aa#b36u2^sjhmgr$)j'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -32,8 +33,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Third-party apps
     'rest_framework',
     'corsheaders',
+
+    # Local apps
     'accounts',
 ]
 
@@ -46,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
 
-    # CORS
+    # CORS middleware must be before CommonMiddleware
     'corsheaders.middleware.CorsMiddleware',
 
     'django.middleware.common.CommonMiddleware',
@@ -83,6 +87,10 @@ TEMPLATES = [
     },
 ]
 
+
+# --------------------------------------------------
+# WSGI
+# --------------------------------------------------
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -162,10 +170,13 @@ REST_FRAMEWORK = {
 
 
 # --------------------------------------------------
-# CORS
+# CORS Configuration
 # --------------------------------------------------
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
 ]
+
+# Allow cookies/credentials if the frontend requires them
+CORS_ALLOW_CREDENTIALS = True
