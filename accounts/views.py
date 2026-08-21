@@ -3,7 +3,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import serializers
 
 from django.db.models import Q
@@ -198,11 +198,13 @@ class ResetPasswordView(generics.GenericAPIView):
 class CategoryListCreateView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [AllowAny]  # Allow public access to categories
 
 
 class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [AllowAny]  # Allow public access to category details
 
 
 # =========================================================
@@ -211,6 +213,7 @@ class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class ProductListCreateView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
+    permission_classes = [AllowAny]  # Allow public access to products
 
     def get_queryset(self):
         queryset = Product.objects.all()
@@ -241,6 +244,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [AllowAny]  # Allow public access to product details
 
     parser_classes = [
         MultiPartParser,
