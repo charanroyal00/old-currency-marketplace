@@ -146,6 +146,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# --------------------------------------------------
+# Media files (Product Images)
+# --------------------------------------------------
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # --------------------------------------------------
 # Custom User Model

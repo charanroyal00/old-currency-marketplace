@@ -18,8 +18,8 @@ const Products = () => {
   const loadProducts = async () => {
     try {
       setLoading(true)
-      const response = await productsService.getProducts()
-      setProducts(response.results)
+      const data = await productsService.getProducts()
+      setProducts(data)
     } catch (error) {
       // Silent error handling - no messages shown
     } finally {
@@ -58,7 +58,7 @@ const Products = () => {
             <table className="w-full">
               <thead>
                 <tr className="border-b-2 border-cream-300 bg-cream-50">
-                  {['Product', 'Category', 'Condition', 'Price', 'Stock', 'Status', 'Actions'].map((h) => (
+                  {['Product', 'Category', 'Condition', 'Price', 'Year', 'Status', 'Actions'].map((h) => (
                     <th key={h} className="px-4 py-3 text-left font-sans text-xs font-semibold uppercase tracking-widest text-ink-500">{h}</th>
                   ))}
                 </tr>
@@ -66,12 +66,14 @@ const Products = () => {
               <tbody className="divide-y divide-cream-200">
                 {products.map((p) => (
                   <tr key={p.id} className="hover:bg-cream-50">
-                    <td className="px-4 py-3 font-sans text-sm font-medium text-ink-900">{p.name}</td>
+                    <td className="px-4 py-3 font-sans text-sm font-medium text-ink-900">{p.title}</td>
                     <td className="px-4 py-3 font-sans text-sm text-ink-600">{p.category}</td>
-                    <td className="px-4 py-3 font-sans text-sm text-ink-600">-</td>
-                    <td className="px-4 py-3 font-sans text-sm text-ink-900">₹{p.price.toLocaleString()}</td>
-                    <td className="px-4 py-3 font-sans text-sm text-ink-600">{p.stock}</td>
-                    <td className="px-4 py-3"><StatusBadge status={p.status} /></td>
+                    <td className="px-4 py-3 font-sans text-sm text-ink-600">{p.condition || '-'}</td>
+                    <td className="px-4 py-3 font-sans text-sm text-ink-900">₹{parseFloat(p.price).toLocaleString()}</td>
+                    <td className="px-4 py-3 font-sans text-sm text-ink-600">{p.year || '-'}</td>
+                    <td className="px-4 py-3">
+                      <StatusBadge status={p.is_available ? 'active' : 'inactive'} />
+                    </td>
                     <td className="px-4 py-3">
                       <button onClick={() => navigate(`/products/edit/${p.id}`)}
                         className="flex items-center gap-1 rounded-lg border border-cream-300 px-3 py-1.5 font-sans text-xs font-medium text-ink-700 hover:bg-cream-100">
