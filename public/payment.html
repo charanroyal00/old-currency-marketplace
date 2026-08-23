@@ -1,0 +1,187 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>NUMIS | Secure Payment</title>
+
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  </head>
+
+  <body>
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+
+    <header class="navbar">
+      <div class="logo">NUM<span>IS</span></div>
+
+      <nav class="nav-links">
+        <a href="index.html">Explore</a>
+        <a href="auctions.html">Auctions</a>
+        <a href="collections.html">Collections</a>
+        <a href="journal.html">Journal</a>
+      </nav>
+    </header>
+
+    <section class="payment-hero">
+      <span>SECURE PAYMENT</span>
+
+      <h1>Complete Your Purchase</h1>
+
+      <p>
+        Your collection is reserved. Select your preferred payment method to
+        complete the order.
+      </p>
+    </section>
+
+    <main class="payment-container">
+      <!-- ORDER -->
+
+      <section class="order-card">
+        <div class="section-title">
+          <span>ORDER</span>
+
+          <h2>Your Collection</h2>
+        </div>
+
+        <div id="orderItems" class="order-items">
+          <!-- Dynamically loaded -->
+        </div>
+
+        <div class="price-summary">
+          <div>
+            <span>Subtotal</span>
+            <strong id="subtotal"> ₹0 </strong>
+          </div>
+
+          <div>
+            <span>Shipping</span>
+            <strong id="shipping"> ₹0 </strong>
+          </div>
+
+          <hr />
+
+          <div class="grand-total">
+            <span> Grand Total </span>
+
+            <strong id="grandTotal"> ₹0 </strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAYMENT -->
+
+      <section class="payment-card">
+        <div class="section-title">
+          <span>PAYMENT METHOD</span>
+
+          <h2>Choose Payment</h2>
+        </div>
+
+        <div class="payment-options">
+          <label class="payment-option active">
+            <input type="radio" name="paymentMethod" value="upi" checked />
+
+            <div>
+              <h3>UPI</h3>
+
+              <p>Google Pay, PhonePe, Paytm</p>
+            </div>
+          </label>
+
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="card" />
+
+            <div>
+              <h3>Credit / Debit Card</h3>
+
+              <p>Visa, Mastercard and RuPay</p>
+            </div>
+          </label>
+
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="cod" />
+
+            <div>
+              <h3>Cash on Delivery</h3>
+
+              <p>Pay when your collection arrives</p>
+            </div>
+          </label>
+        </div>
+
+        <!-- UPI -->
+
+        <div id="upiPanel" class="payment-panel">
+          <label> UPI ID </label>
+
+          <input type="text" id="upiId" placeholder="example@upi" />
+        </div>
+
+        <!-- CARD -->
+
+        <div id="cardPanel" class="payment-panel hidden">
+          <label> Card Number </label>
+
+          <input
+            id="cardNumber"
+            maxlength="19"
+            placeholder="1234 5678 9012 3456"
+          />
+
+          <div class="card-row">
+            <div>
+              <label> Expiry </label>
+
+              <input id="expiry" placeholder="MM/YY" />
+            </div>
+
+            <div>
+              <label> CVV </label>
+
+              <input id="cvv" maxlength="3" placeholder="123" />
+            </div>
+          </div>
+        </div>
+
+        <!-- COD -->
+
+        <div id="codPanel" class="payment-panel hidden">
+          <div class="cod-message">
+            <strong> Cash on Delivery </strong>
+
+            <p>Pay securely when your authenticated collection is delivered.</p>
+          </div>
+        </div>
+
+        <button id="payButton" class="pay-button">
+          Pay ₹<span id="payAmount">0</span>
+        </button>
+
+        <div class="secure-note">🔒 Secure NUMIS Transaction</div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <h2>NUM<span>IS</span></h2>
+
+      <p>Authenticated collectibles. Preserved history.</p>
+    </footer>
+
+    <script src="{% static 'js/payment.js' %}"></script>
+  </body>
+</html>

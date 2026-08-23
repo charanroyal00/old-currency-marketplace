@@ -14,8 +14,11 @@ import Sellers from './pages/Sellers'
 import Customers from './pages/Customers'
 import Analytics from './pages/Analytics'
 import Settings from './pages/Settings'
+<<<<<<< HEAD
+=======
 import ReviewModeration from './pages/ReviewModeration'
 import Reports from './pages/Reports'
+>>>>>>> 3b725e6 (Fix: Add missing tsconfig.node.json to resolve 500 error on main.tsx)
 import CategoryManagement from './pages/CategoryManagement'
 import InventoryManagement from './pages/InventoryManagement'
 import SellerInventory from './pages/SellerInventory'
@@ -41,8 +44,11 @@ function App() {
             <Route path="orders/:id"       element={<OrderDetail />} />
             <Route path="sellers"          element={<Sellers />} />
             <Route path="customers"        element={<Customers />} />
+<<<<<<< HEAD
+=======
             <Route path="reviews"          element={<ReviewModeration />} />
             <Route path="reports"          element={<Reports />} />
+>>>>>>> 3b725e6 (Fix: Add missing tsconfig.node.json to resolve 500 error on main.tsx)
             <Route path="analytics"        element={<Analytics />} />
             <Route path="settings"         element={<Settings />} />
             <Route path="categories"       element={<CategoryManagement />} />

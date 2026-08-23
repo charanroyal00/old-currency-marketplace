@@ -1,0 +1,778 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #090909;
+    color: #f5f1e8;
+    font-family: "Inter", sans-serif;
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.background-orb {
+    position: fixed;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.orb-one {
+    top: -180px;
+    left: -160px;
+    background: #c6a15b;
+}
+
+.orb-two {
+    right: -180px;
+    bottom: -180px;
+    background: #8b6b35;
+}
+
+.orb-three {
+    top: 45%;
+    left: 45%;
+    background: #c6a15b;
+}
+
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+    height: 80px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.logo {
+    font-family: "Cormorant Garamond";
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.logo span {
+    color: #c6a15b;
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-links a {
+    color: #999;
+    text-decoration: none;
+    font-size: 13px;
+    transition: .25s;
+}
+
+.nav-links a:hover {
+    color: #c6a15b;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.secondary-btn {
+    color: #ddd;
+    border: 1px solid rgba(255,255,255,.12);
+    padding: 10px 18px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   BREADCRUMB
+========================================= */
+
+.breadcrumb {
+    width: 86%;
+    max-width: 1250px;
+    margin: 25px auto 0;
+
+    display: flex;
+    gap: 12px;
+
+    color: #666;
+    font-size: 12px;
+}
+
+.breadcrumb a {
+    color: #888;
+    text-decoration: none;
+}
+
+.breadcrumb strong {
+    color: #c6a15b;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.checkout-hero {
+    text-align: center;
+    padding: 65px 20px 50px;
+}
+
+.hero-label {
+    color: #c6a15b;
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+.checkout-hero h1 {
+    font-family: "Cormorant Garamond";
+    font-size: clamp(44px, 6vw, 70px);
+    margin: 14px 0;
+}
+
+.checkout-hero p {
+    max-width: 680px;
+    margin: auto;
+    color: #888;
+    line-height: 1.8;
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.checkout-container {
+    width: 86%;
+    max-width: 1250px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 1.5fr .85fr;
+
+    gap: 30px;
+
+    padding-bottom: 100px;
+}
+
+.checkout-left {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+
+/* =========================================
+   CARDS
+========================================= */
+
+.checkout-card,
+.checkout-summary,
+.whatsapp-info {
+
+    background: rgba(255,255,255,.035);
+
+    border: 1px solid rgba(255,255,255,.09);
+
+    border-radius: 4px;
+
+    padding: 32px;
+}
+
+.card-heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    margin-bottom: 28px;
+}
+
+.card-heading span {
+    color: #c6a15b;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.card-heading h2 {
+    font-family: "Cormorant Garamond";
+    font-size: 30px;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    color: #aaa;
+    font-size: 12px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+
+    width: 100%;
+
+    background: #101010;
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    color: white;
+
+    padding: 14px;
+
+    outline: none;
+
+    font-family: "Inter", sans-serif;
+
+    transition: .25s;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #c6a15b;
+}
+
+.form-group select option {
+    background: #111;
+}
+
+
+/* =========================================
+   DELIVERY
+========================================= */
+
+.delivery-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.delivery-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 19px;
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.delivery-card:hover,
+.delivery-card.active {
+
+    border-color: #c6a15b;
+
+    background: rgba(198,161,91,.05);
+}
+
+.delivery-card input {
+    accent-color: #c6a15b;
+}
+
+.delivery-card > div {
+    flex: 1;
+}
+
+.delivery-card h3 {
+    font-size: 14px;
+}
+
+.delivery-card p {
+    color: #777;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.delivery-card > strong {
+    color: #c6a15b;
+}
+
+
+/* =========================================
+   WHATSAPP
+========================================= */
+
+.whatsapp-info {
+
+    display: flex;
+
+    gap: 18px;
+
+    align-items: center;
+
+    border-color: rgba(198,161,91,.2);
+}
+
+.whatsapp-icon {
+
+    min-width: 50px;
+
+    height: 50px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: rgba(198,161,91,.1);
+
+    color: #c6a15b;
+
+    font-weight: 700;
+
+    font-size: 12px;
+}
+
+.whatsapp-info h3 {
+    font-size: 15px;
+}
+
+.whatsapp-info p {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.7;
+    margin-top: 6px;
+}
+
+
+/* =========================================
+   SUMMARY
+========================================= */
+
+.checkout-summary {
+    height: fit-content;
+
+    position: sticky;
+
+    top: 25px;
+}
+
+.summary-label {
+    color: #c6a15b;
+    letter-spacing: 3px;
+    font-size: 10px;
+}
+
+.checkout-summary > h2 {
+    font-family: "Cormorant Garamond";
+    font-size: 34px;
+    margin-top: 8px;
+}
+
+
+/* =========================================
+   ITEMS
+========================================= */
+
+.checkout-items {
+    margin-top: 28px;
+}
+
+.checkout-item {
+
+    display: flex;
+
+    gap: 15px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.checkout-item-image {
+
+    width: 65px;
+
+    height: 65px;
+
+    object-fit: cover;
+
+    border: 1px solid rgba(255,255,255,.1);
+}
+
+.checkout-item-info {
+    flex: 1;
+}
+
+.checkout-item-info h3 {
+    font-family: "Cormorant Garamond";
+    font-size: 18px;
+}
+
+.checkout-item-info p {
+    color: #777;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.checkout-item-price {
+    color: #eee;
+    font-size: 13px;
+}
+
+
+/* =========================================
+   SUMMARY BOX
+========================================= */
+
+.summary-box {
+    margin-top: 25px;
+}
+
+.summary-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 12px 0;
+
+    color: #999;
+
+    font-size: 13px;
+}
+
+.summary-row strong {
+    color: #eee;
+}
+
+.summary-box hr {
+    border: 0;
+
+    border-top: 1px solid rgba(255,255,255,.1);
+
+    margin: 12px 0;
+}
+
+.summary-total {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.summary-total h3 {
+    font-size: 14px;
+}
+
+.summary-total h2 {
+    color: #c6a15b;
+
+    font-family: "Cormorant Garamond";
+
+    font-size: 30px;
+}
+
+
+/* =========================================
+   ORDER BUTTON
+========================================= */
+
+.checkout-btn {
+
+    width: 100%;
+
+    margin-top: 30px;
+
+    padding: 18px;
+
+    border: 0;
+
+    background: #c6a15b;
+
+    color: #090909;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    letter-spacing: 1.5px;
+
+    transition: .25s;
+}
+
+.checkout-btn:hover {
+    transform: translateY(-2px);
+}
+
+.checkout-btn:disabled {
+    opacity: .6;
+    cursor: wait;
+    transform: none;
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.order-status {
+
+    text-align: center;
+
+    padding: 25px;
+
+    margin-top: 20px;
+
+    border: 1px solid rgba(198,161,91,.3);
+
+    background: rgba(198,161,91,.04);
+}
+
+.success-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    margin: auto auto 12px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: #c6a15b;
+
+    color: #111;
+
+    font-weight: 700;
+
+    font-size: 22px;
+}
+
+.order-status h3 {
+    font-family: "Cormorant Garamond";
+    font-size: 25px;
+}
+
+.order-status p {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 6px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* =========================================
+   LINKS
+========================================= */
+
+.continue-shopping {
+
+    display: block;
+
+    text-align: center;
+
+    color: #777;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    margin-top: 18px;
+}
+
+.continue-shopping:hover {
+    color: #c6a15b;
+}
+
+.secure-note {
+
+    text-align: center;
+
+    color: #555;
+
+    font-size: 10px;
+
+    margin-top: 15px;
+}
+
+
+/* =========================================
+   TRUST
+========================================= */
+
+.trust-section {
+
+    width: 86%;
+
+    max-width: 1250px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 20px;
+
+    padding-bottom: 100px;
+}
+
+.trust-card {
+
+    padding: 25px;
+
+    border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.trust-card h3 {
+    font-size: 14px;
+}
+
+.trust-card p {
+    color: #777;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+
+    margin-top: 10px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+
+    border-top: 1px solid rgba(255,255,255,.08);
+
+    padding: 55px 7%;
+}
+
+.footer h2 {
+
+    font-family: "Cormorant Garamond";
+
+    font-size: 35px;
+}
+
+.footer h2 span {
+    color: #c6a15b;
+}
+
+.footer p {
+
+    max-width: 500px;
+
+    color: #666;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+
+    margin-top: 8px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:900px) {
+
+    .checkout-container {
+        grid-template-columns: 1fr;
+    }
+
+    .checkout-summary {
+        position: static;
+    }
+
+    .trust-section {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width:650px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+    .checkout-container,
+    .trust-section {
+        width: 92%;
+    }
+
+    .checkout-card,
+    .checkout-summary {
+        padding: 22px;
+    }
+
+}

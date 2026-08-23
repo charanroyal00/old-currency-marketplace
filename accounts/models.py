@@ -132,8 +132,20 @@ class Wishlist(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.product.title}"
 
-
 class Checkout(models.Model):
+
+    DELIVERY_CHOICES = [
+        ("standard", "Standard Delivery"),
+        ("express", "Express Delivery"),
+        ("priority", "Priority Insured Delivery"),
+    ]
+
+    STATUS_CHOICES = [
+        ("Pending", "Pending"),
+        ("Confirmed", "Confirmed"),
+        ("Cancelled", "Cancelled"),
+    ]
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -152,7 +164,55 @@ class Checkout(models.Model):
         decimal_places=2
     )
 
+    # CUSTOMER INFORMATION
+
+    full_name = models.CharField(
+        max_length=255
+    )
+
+    email = models.EmailField()
+
+    phone = models.CharField(
+        max_length=20
+    )
+
+    alternate_phone = models.CharField(
+        max_length=20,
+        blank=True
+    )
+
+    # SHIPPING
+
     address = models.TextField()
+
+    city = models.CharField(
+        max_length=100
+    )
+
+    state = models.CharField(
+        max_length=100
+    )
+
+    pincode = models.CharField(
+        max_length=10
+    )
+
+    country = models.CharField(
+        max_length=100,
+        default="India"
+    )
+
+    delivery_method = models.CharField(
+        max_length=20,
+        choices=DELIVERY_CHOICES,
+        default="standard"
+    )
+
+    shipping_cost = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
 
     payment_method = models.CharField(
         max_length=50,
@@ -161,10 +221,13 @@ class Checkout(models.Model):
 
     status = models.CharField(
         max_length=50,
+        choices=STATUS_CHOICES,
         default="Pending"
     )
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def __str__(self):
         return f"{self.user.username} - {self.product.title}"

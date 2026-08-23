@@ -35,6 +35,8 @@ from .views import (
     ReviewDetailView,
 
     CurrentUserView,
+    SecureCheckoutView,
+    CheckoutSubmitView,
 )
 
 
@@ -158,6 +160,17 @@ urlpatterns = [
         CheckoutDetailView.as_view(),
         name="checkout-detail"
     ),
+    
+    path(
+    "checkout/submit/",
+    CheckoutSubmitView.as_view(),
+    name="checkout-submit"
+),
+    path(
+    "secure-checkout/",
+    SecureCheckoutView.as_view(),
+    name="secure-checkout"
+),
 
 
     # =====================================================
@@ -209,6 +222,7 @@ urlpatterns = [
         AuctionDetailView.as_view(),
         name="auction-detail"
     ),
+
 
 
     # =====================================================

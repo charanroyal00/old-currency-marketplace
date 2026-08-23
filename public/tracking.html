@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>NUMIS | Track Order</title>
+
+    <link rel="stylesheet" href="/static/css/tracking.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  </head>
+
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="navbar">
+      <div class="logo">NUMIS <span>®</span></div>
+
+      <nav>
+        <a href="/">Home</a>
+
+        <a href="/category.html"> Collections </a>
+
+        <a href="/product.html"> Marketplace </a>
+      </nav>
+    </header>
+
+    <main class="tracking-page">
+      <section class="tracking-header">
+        <span>NUMIS DELIVERY INTELLIGENCE</span>
+
+        <h1>Track Your <em>Collection</em></h1>
+
+        <p>Follow your piece of history from our archive to your doorstep.</p>
+      </section>
+
+      <section class="tracking-card">
+        <div class="order-heading">
+          <div>
+            <span>ORDER NUMBER</span>
+
+            <h2 id="orderId">#------</h2>
+          </div>
+
+          <div class="order-status" id="orderStatus">LOADING</div>
+        </div>
+
+        <div class="timeline" id="timeline">
+          <div class="timeline-item active">
+            <div class="timeline-dot">✓</div>
+
+            <div>
+              <h3>Order Placed</h3>
+
+              <p>Your order has been received.</p>
+            </div>
+          </div>
+
+          <div class="timeline-line"></div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">02</div>
+
+            <div>
+              <h3>Payment Confirmed</h3>
+
+              <p>Payment verification completed.</p>
+            </div>
+          </div>
+
+          <div class="timeline-line"></div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">03</div>
+
+            <div>
+              <h3>Processing</h3>
+
+              <p>Your collection is being prepared.</p>
+            </div>
+          </div>
+
+          <div class="timeline-line"></div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">04</div>
+
+            <div>
+              <h3>Shipped</h3>
+
+              <p>Your order has left the NUMIS archive.</p>
+            </div>
+          </div>
+
+          <div class="timeline-line"></div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">05</div>
+
+            <div>
+              <h3>Delivered</h3>
+
+              <p>Your collection has arrived.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tracking-footer">
+          <div>
+            <span>ESTIMATED DELIVERY</span>
+
+            <strong id="deliveryDate"> Calculating... </strong>
+          </div>
+
+          <button id="homeButton">Return to NUMIS →</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/js/tracking.js"></script>
+  </body>
+</html>

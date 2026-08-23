@@ -1,7 +1,13 @@
+<<<<<<< HEAD
+import { Bell, Menu, Search, User, LogOut } from 'lucide-react'
+import { useAuth } from '../../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
+=======
 import { Menu, Search, User, LogOut } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import NotificationsDropdown from './NotificationsDropdown'
+>>>>>>> 3b725e6 (Fix: Add missing tsconfig.node.json to resolve 500 error on main.tsx)
 
 interface HeaderProps {
   onMenuClick: () => void
@@ -43,7 +49,20 @@ const Header = ({ onMenuClick }: HeaderProps) => {
       {/* Right */}
       <div className="flex items-center gap-1 md:gap-3">
         {/* Notifications */}
+<<<<<<< HEAD
+        <button
+          className="relative rounded-lg p-2 text-ink-600 hover:bg-cream-200 focus:outline-none focus:ring-2 focus:ring-gold-500"
+          aria-label="Notifications"
+        >
+          <Bell className="h-5 w-5" />
+          <span
+            className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-gold-600"
+            aria-hidden="true"
+          />
+        </button>
+=======
         <NotificationsDropdown />
+>>>>>>> 3b725e6 (Fix: Add missing tsconfig.node.json to resolve 500 error on main.tsx)
 
         {/* Divider */}
         <div className="hidden h-6 w-px bg-cream-300 md:block" aria-hidden="true" />

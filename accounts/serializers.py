@@ -14,13 +14,21 @@ from .models import (
 
 import random
 from django.utils import timezone
+from pathlib import Path
+# from dotenv import load_dotenv
+import os
+
+# load_dotenv()
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# =========================
+# =========================================================
 # REGISTER
-# =========================
+# =========================================================
 
 class RegisterSerializer(serializers.ModelSerializer):
+
     password = serializers.CharField(write_only=True)
 
     class Meta:
@@ -34,6 +42,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
+
         user = User.objects.create_user(
             username=validated_data["username"],
             email=validated_data["email"],
@@ -45,16 +54,19 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-# =========================
+# =========================================================
 # FORGOT PASSWORD
-# =========================
+# =========================================================
 
 class ForgotPasswordSerializer(serializers.Serializer):
+
     email = serializers.EmailField()
 
     def validate_email(self, value):
+
         try:
             User.objects.get(email=value)
+
         except User.DoesNotExist:
             raise serializers.ValidationError(
                 "User with this email does not exist."
@@ -63,6 +75,7 @@ class ForgotPasswordSerializer(serializers.Serializer):
         return value
 
     def save(self):
+
         email = self.validated_data["email"]
 
         user = User.objects.get(email=email)
@@ -71,6 +84,7 @@ class ForgotPasswordSerializer(serializers.Serializer):
 
         user.otp = otp
         user.otp_created_at = timezone.now()
+
         user.save()
 
         return {
@@ -79,26 +93,31 @@ class ForgotPasswordSerializer(serializers.Serializer):
         }
 
 
-# =========================
+# =========================================================
 # VERIFY OTP
-# =========================
+# =========================================================
 
 class VerifyOTPSerializer(serializers.Serializer):
+
     email = serializers.EmailField()
+
     otp = serializers.CharField(max_length=6)
 
     def validate(self, attrs):
+
         email = attrs.get("email")
         otp = attrs.get("otp")
 
         try:
             user = User.objects.get(email=email)
+
         except User.DoesNotExist:
             raise serializers.ValidationError(
                 "User not found."
             )
 
         if user.otp != otp:
+
             raise serializers.ValidationError(
                 "Invalid OTP."
             )
@@ -106,16 +125,22 @@ class VerifyOTPSerializer(serializers.Serializer):
         return attrs
 
 
-# =========================
+# =========================================================
 # RESET PASSWORD
-# =========================
+# =========================================================
 
 class ResetPasswordSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    new_password = serializers.CharField(write_only=True)
 
-    def save(self):
+    email = serializers.EmailField()
+
+    new_password = serializers.CharField(
+        write_only=True
+    )
+
+    def save():
+
         email = self.validated_data["email"]
+
         new_password = self.validated_data["new_password"]
 
         user = User.objects.get(email=email)
@@ -132,9 +157,9 @@ class ResetPasswordSerializer(serializers.Serializer):
         }
 
 
-# =========================
+# =========================================================
 # CATEGORY
-# =========================
+# =========================================================
 
 class CategorySerializer(serializers.ModelSerializer):
 
@@ -143,32 +168,95 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-# =========================
+# =========================================================
 # PRODUCT
-# =========================
+# =========================================================
 
 class ProductSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(required=False)
+
+    image = serializers.ImageField(
+        required=False,
+        allow_null=True
+    )
+
+    category_name = serializers.CharField(
+        source="category.name",
+        read_only=True
+    )
+
+    category_description = serializers.CharField(
+        source="category.description",
+        read_only=True
+    )
+
+    seller_name = serializers.CharField(
+        source="seller.username",
+        read_only=True
+    )
 
     class Meta:
         model = Product
-        fields = "__all__"
 
+        fields = [
+            "id",
+            "seller",
+            "seller_name",
+            "category",
+            "category_name",
+            "category_description",
+            "title",
+            "description",
+            "price",
+            "image",
+            "condition",
+            "year",
+            "is_available",
+            "created_at",
+            "updated_at",
+        ]
 
-# =========================
+        read_only_fields = [
+            "id",
+            "seller_name",
+            "category_name",
+            "category_description",
+            "created_at",
+            "updated_at",
+        ]
+
+# =========================================================
 # CART
-# =========================
+# =========================================================
 
 class CartSerializer(serializers.ModelSerializer):
 
+    product_details = ProductSerializer(
+        source="product",
+        read_only=True
+    )
+
     class Meta:
         model = Cart
-        fields = "__all__"
+
+        fields = [
+            "id",
+            "user",
+            "product",
+            "product_details",
+            "quantity",
+            "added_at",
+        ]
+
+        read_only_fields = [
+            "id",
+            "added_at",
+            "product_details",
+        ]
 
 
-# =========================
+# =========================================================
 # WISHLIST
-# =========================
+# =========================================================
 
 class WishlistSerializer(serializers.ModelSerializer):
 
@@ -177,9 +265,9 @@ class WishlistSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-# =========================
+# =========================================================
 # CHECKOUT
-# =========================
+# =========================================================
 
 class CheckoutSerializer(serializers.ModelSerializer):
 
@@ -188,20 +276,55 @@ class CheckoutSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-# =========================
+class CheckoutSubmitSerializer(serializers.Serializer):
+
+    customer = serializers.DictField()
+
+    cart = serializers.ListField()
+
+    subtotal = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    shipping = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    grand_total = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+# =========================================================
 # ORDER
-# =========================
+# =========================================================
 
 class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = "__all__"
+
+        fields = [
+            "id",
+            "user",
+            "product",
+            "quantity",
+            "total_price",
+            "status",
+            "ordered_at",
+        ]
+
+        read_only_fields = [
+            "id",
+            "user",
+            "ordered_at",
+        ]
 
 
-# =========================
+# =========================================================
 # PAYMENT
-# =========================
+# =========================================================
 
 class PaymentSerializer(serializers.ModelSerializer):
 
@@ -210,9 +333,9 @@ class PaymentSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-# =========================
+# =========================================================
 # AUCTION
-# =========================
+# =========================================================
 
 class AuctionSerializer(serializers.ModelSerializer):
 
@@ -221,19 +344,14 @@ class AuctionSerializer(serializers.ModelSerializer):
         read_only=True
     )
 
-    product_title = serializers.CharField(
-        source="product.title",
-        read_only=True
-    )
-
     class Meta:
         model = Auction
         fields = "__all__"
 
 
-# =========================
-# REVIEW & RATING
-# =========================
+# =========================================================
+# REVIEW
+# =========================================================
 
 class ReviewSerializer(serializers.ModelSerializer):
 
@@ -246,19 +364,15 @@ class ReviewSerializer(serializers.ModelSerializer):
         read_only=True
     )
 
-    product_title = serializers.CharField(
-        source="product.title",
-        read_only=True
-    )
-
     class Meta:
+
         model = Review
+
         fields = [
             "id",
             "user",
             "user_name",
             "product",
-            "product_title",
             "rating",
             "comment",
             "created_at",
@@ -267,6 +381,22 @@ class ReviewSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "id",
             "user_name",
-            "product_title",
             "created_at",
         ]
+
+        WHATSAPP_ACCESS_TOKEN = os.getenv(
+    "WHATSAPP_ACCESS_TOKEN"
+)
+
+WHATSAPP_PHONE_NUMBER_ID = os.getenv(
+    "WHATSAPP_PHONE_NUMBER_ID"
+)
+
+WHATSAPP_API_VERSION = os.getenv(
+    "WHATSAPP_API_VERSION",
+    "v23.0"
+)
+
+WHATSAPP_BUSINESS_NUMBER = os.getenv(
+    "WHATSAPP_BUSINESS_NUMBER"
+)

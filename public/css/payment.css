@@ -1,0 +1,299 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0b0b0b;
+  color: #f5f1e8;
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+}
+
+.background-orb {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.orb-one {
+  top: -150px;
+  left: -150px;
+  background: #c6a15b;
+}
+
+.orb-two {
+  right: -150px;
+  bottom: -150px;
+  background: #8b6b35;
+}
+
+.navbar {
+  height: 80px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo {
+  font-family: "Cormorant Garamond";
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.logo span,
+.footer span {
+  color: #c6a15b;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+}
+
+.nav-links a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.nav-links a:hover {
+  color: #c6a15b;
+}
+
+.payment-hero {
+  text-align: center;
+  padding: 80px 20px 50px;
+}
+
+.payment-hero span,
+.section-title span {
+  color: #c6a15b;
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+.payment-hero h1 {
+  font-family: "Cormorant Garamond";
+  font-size: clamp(42px, 6vw, 70px);
+  margin: 15px 0;
+}
+
+.payment-hero p {
+  max-width: 650px;
+  margin: auto;
+  color: #999;
+  line-height: 1.8;
+}
+
+.payment-container {
+  width: 86%;
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding-bottom: 100px;
+}
+
+.order-card,
+.payment-card {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 4px;
+  padding: 35px;
+}
+
+.section-title h2 {
+  font-family: "Cormorant Garamond";
+  font-size: 34px;
+  margin-top: 8px;
+}
+
+.order-items {
+  margin-top: 30px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.order-item h3 {
+  font-family: "Cormorant Garamond";
+  font-size: 21px;
+}
+
+.order-item p {
+  color: #888;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.price-summary {
+  margin-top: 30px;
+}
+
+.price-summary > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  color: #aaa;
+}
+
+.price-summary strong {
+  color: #fff;
+}
+
+.price-summary hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 15px 0;
+}
+
+.grand-total {
+  font-size: 18px;
+}
+
+.grand-total strong {
+  color: #c6a15b;
+  font-size: 25px;
+}
+
+.payment-options {
+  margin-top: 30px;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.payment-option:hover,
+.payment-option.active {
+  border-color: #c6a15b;
+  background: rgba(198, 161, 91, 0.05);
+}
+
+.payment-option input {
+  accent-color: #c6a15b;
+}
+
+.payment-option h3 {
+  font-size: 15px;
+}
+
+.payment-option p {
+  color: #888;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.payment-panel {
+  margin-top: 25px;
+}
+
+.payment-panel label {
+  display: block;
+  color: #aaa;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.payment-panel input {
+  width: 100%;
+  padding: 15px;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: white;
+  outline: none;
+}
+
+.card-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.hidden {
+  display: none;
+}
+
+.cod-message {
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cod-message p {
+  color: #888;
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+.pay-button {
+  width: 100%;
+  margin-top: 30px;
+  padding: 18px;
+  border: 0;
+  background: #c6a15b;
+  color: #080808;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+.pay-button:hover {
+  transform: translateY(-2px);
+}
+
+.secure-note {
+  text-align: center;
+  color: #666;
+  font-size: 11px;
+  margin-top: 15px;
+}
+
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  padding: 50px;
+}
+
+.footer h2 {
+  font-family: "Cormorant Garamond";
+  font-size: 35px;
+}
+
+.footer p {
+  color: #777;
+  margin-top: 10px;
+}
+
+@media (max-width: 800px) {
+  .payment-container {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}

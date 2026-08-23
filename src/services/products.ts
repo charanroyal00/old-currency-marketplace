@@ -2,14 +2,13 @@ import { apiService, ApiError } from './api'
 
 export interface Product {
   id: number
-  title: string  // Backend uses 'title' not 'name'
+  name: string
   description: string
-  price: string  // Backend returns decimal as string
-  category: number  // Backend uses category ID
-  image: string  // Backend uses single 'image' not 'images' array
-  condition: string
-  year: number | null
-  is_available: boolean
+  price: number
+  category: string
+  images: string[]
+  stock: number
+  status: 'active' | 'inactive' | 'out_of_stock'
   seller: number
   created_at: string
   updated_at: string
@@ -23,13 +22,12 @@ export interface Category {
 }
 
 export interface CreateProductData {
-  title: string
+  name: string
   description: string
   price: number
-  category: number  // Category ID
-  condition?: string
-  year?: number
-  image?: File
+  category: string
+  stock: number
+  images?: File[]
 }
 
 export interface UpdateProductData extends Partial<CreateProductData> {
@@ -46,7 +44,7 @@ class ProductsService {
     category?: string
     seller?: number
     status?: string
-  }): Promise<Product[]> {
+  }): Promise<{ results: Product[], count: number }> {
     try {
       const searchParams = new URLSearchParams()
       if (params?.page) searchParams.set('page', params.page.toString())
@@ -58,11 +56,9 @@ class ProductsService {
       const queryString = searchParams.toString()
       const endpoint = queryString ? `/products/?${queryString}` : '/products/'
       
-      // Backend returns array directly, not paginated
-      return await apiService.get<Product[]>(endpoint)
+      return await apiService.get<{ results: Product[], count: number }>(endpoint)
     } catch (error) {
-      // Silent fail - return empty array
-      return []
+      throw new ApiError('Failed to fetch products', 500, error)
     }
   }
 
@@ -78,21 +74,23 @@ class ProductsService {
   // Create product
   async createProduct(data: CreateProductData): Promise<Product> {
     try {
-      if (data.image) {
+      if (data.images && data.images.length > 0) {
         // Handle file upload
         const formData = new FormData()
-        formData.append('title', data.title)
+        formData.append('name', data.name)
         formData.append('description', data.description)
         formData.append('price', data.price.toString())
-        formData.append('category', data.category.toString())
-        if (data.condition) formData.append('condition', data.condition)
-        if (data.year) formData.append('year', data.year.toString())
-        formData.append('image', data.image)
+        formData.append('category', data.category)
+        formData.append('stock', data.stock.toString())
+        
+        data.images.forEach((file, index) => {
+          formData.append(`images[${index}]`, file)
+        })
 
         return await apiService.uploadFile<Product>('/products/', formData)
       } else {
         // Regular JSON post
-        const { image, ...productData } = data
+        const { images, ...productData } = data
         return await apiService.post<Product>('/products/', productData)
       }
     } catch (error) {
@@ -103,20 +101,23 @@ class ProductsService {
   // Update product
   async updateProduct(id: number, data: UpdateProductData): Promise<Product> {
     try {
-      if (data.image) {
+      if (data.images && data.images.length > 0) {
         // Handle file upload
         const formData = new FormData()
         Object.entries(data).forEach(([key, value]) => {
-          if (key !== 'image' && value !== undefined) {
+          if (key !== 'images') {
             formData.append(key, value.toString())
           }
         })
-        formData.append('image', data.image)
+        
+        data.images.forEach((file, index) => {
+          formData.append(`images[${index}]`, file)
+        })
 
         return await apiService.uploadFile<Product>(`/products/${id}/`, formData)
       } else {
         // Regular JSON patch
-        const { image, ...productData } = data
+        const { images, ...productData } = data
         return await apiService.patch<Product>(`/products/${id}/`, productData)
       }
     } catch (error) {
